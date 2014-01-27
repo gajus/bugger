@@ -1,0 +1,6 @@
+0.0.1 / 2014-01-27
+
+* Added unit tests.
+* Integrated with travis (https://travis-ci.org/gajus/bump) and coveralls (https://coveralls.io/r/gajus/bump).
+* Starting change log.
+* Added composer.json.

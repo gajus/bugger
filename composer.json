@@ -1,0 +1,26 @@
+{
+	"name": "gajus/bump",
+	"description": "Bump (or \"Better Dump\") is a debugging tool to dump variable content excluding the existing buffer.",
+	"keywords": ["bump", "dump", "debug"],
+	"homepage": "https://github.com/gajus/bump",
+	"type": "library",
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Gajus Kuizinas",
+			"email": "gk@anuary.com"
+		}
+	],
+	"require": {
+		"php": ">=5.5"
+	},
+	"require-dev": {
+	    "satooshi/php-coveralls": "dev-master"
+	},
+	"autoload": {
+		"psr-4": {
+			"gajus\\": "src/"
+		},
+		"files": ["src/MyLibrary/functions.php"]
+	}
+}
