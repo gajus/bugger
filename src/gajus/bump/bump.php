@@ -18,11 +18,11 @@ if (!function_exists('bump')) {
 	});
 
 	/**
-	 * Used to dump information about variables and access the backtrace log.
+	 * Used to dump information about variables and the backtrace log.
 	 * This function is intentionally made available to the global scope.
 	 */
 	function bump () {
-		if (ob_get_level()) {
+		while (ob_get_level()) {
 			ob_end_clean();
 		}
 		
@@ -35,14 +35,14 @@ if (!function_exists('bump')) {
 
 		$response = ob_get_clean();
 		
-		// This ensures that only readable characters are outputed.
-		$safe_response = preg_replace('/(?!\n)[\p{Cc}]/', '', $response);
-
-		if ($response !== $safe_response) {
-			$safe_response = 'The output has been altered to exclude non-printable characters.' . PHP_EOL . $safe_response;
-		}
+		// Convert control characters to hex representation.
+		// Refer to http://stackoverflow.com/a/8171868/368691
+		// @todo This implementation will not be able to represent pack('S', 65535).
+		$response = preg_replace_callback('/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u', function ($e) {
+			return '\\' . bin2hex($e[0]);
+		}, $response);
 		
-		// Math everything that looks like a timestamp and convert it to a human readable date-time format.
+		// Match everything that looks like a timestamp and convert it to a human readable date-time format.
 		$response = preg_replace_callback('/int\(([0-9]{10})\)/', function ($e) {
 			return $e[0] . ' <== ' . date('Y-m-d H:i:s', $e[1]);
 		}, $response);

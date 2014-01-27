@@ -7,9 +7,8 @@ Bump (or "Better Dump") is a debugging tool to dump variable content excluding t
 
 ## Bells and whistles
 
-Bump will strip out non-printable characters (characters that browser would now allow you to display and would force to download output as `application/octet-stream`). Of course, in this case there will be a delicate warning letting you know that you might need to further investigate the output.
-
-Bump will find all UNIX timestamps and add a nice little comment next to it with the human-readable version.
+* Bump will convert non-printable (control) characters (characters that would force browser to download output as `application/octet-stream`) to their hexadecimal presentation.
+* Bump will append human-readable version of each UNIX timestamp.
 
 ## Use
 
