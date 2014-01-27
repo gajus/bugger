@@ -9,7 +9,7 @@ int(1390850756) <== 2014-01-27 19:25:56
 
 Backtrace:
 
-#0  bump(test, 1390850756) called at [./bin/bump_test.php:4]
+#0  bump(test, 1390850756) called at [./bin/bump_test.php:6]
 ';
         
         $this->assertSame($expected_output, $output);
