@@ -9,7 +9,9 @@ if (!function_exists('bump')) {
 		}
 
 		if (php_sapi_name() !== 'cli') {
-			ob_end_clean();
+			while (ob_get_level()) {
+				ob_end_clean();
+			}
 
 			header('Content-Type: text/plain; charset="UTF-8"', true);
 		}
