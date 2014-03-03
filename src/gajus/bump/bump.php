@@ -38,6 +38,10 @@ if (!function_exists('bump')) {
 
 		$response = ob_get_clean();
 
+		$regex_encoding = mb_regex_encoding();
+
+		mb_regex_encoding('UTF-8');
+
 		// Convert control characters to hex representation.
 		// Refer to http://stackoverflow.com/a/8171868/368691
 		// @todo This implementation will not be able to represent pack('S', 65535).
@@ -59,6 +63,8 @@ if (!function_exists('bump')) {
 			throw new \ErrorException('PCRE error ocurred while attempting to replace timestamp values with human-friedly format.');
 			#var_dump( array_flip(get_defined_constants(true)['pcre'])[preg_last_error()] );
 		}
+
+		mb_regex_encoding($regex_encoding);
 		
 		$GLOBALS['bump'] = $response;
 		
