@@ -41,7 +41,7 @@ if (!function_exists('bump')) {
 		// Convert control characters to hex representation.
 		// Refer to http://stackoverflow.com/a/8171868/368691
 		// @todo This implementation will not be able to represent pack('S', 65535).
-		$response = mb_ereg_replace_callback('/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u', function ($e) {
+		$response = \mb_ereg_replace_callback('[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]', function ($e) {
 			return '\\' . bin2hex($e[0]);
 		}, $response);
 
@@ -51,9 +51,14 @@ if (!function_exists('bump')) {
 		}
 
 		// Match everything that looks like a timestamp and convert it to a human readable date-time format.
-		$response = mb_ereg_replace_callback('/int\(([0-9]{10})\)/', function ($e) {
+		$response = \mb_ereg_replace_callback('int\(([0-9]{10})\)', function ($e) {
 			return $e[0] . ' <== ' . date('Y-m-d H:i:s', $e[1]);
 		}, $response);
+
+		if ($response === false) {
+			throw new \ErrorException('PCRE error ocurred while attempting to replace timestamp values with human-friedly format.');
+			#var_dump( array_flip(get_defined_constants(true)['pcre'])[preg_last_error()] );
+		}
 		
 		$GLOBALS['bump'] = $response;
 		
