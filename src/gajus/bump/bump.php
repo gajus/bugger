@@ -1,5 +1,4 @@
 <?php
-// In case bump has been loaded using http://uk1.php.net/manual/en/ini.core.php#ini.auto-prepend-file.
 if (!function_exists('bump')) {
 	ob_start();
 
@@ -15,6 +14,8 @@ if (!function_exists('bump')) {
 
 			header('Content-Type: text/plain; charset="UTF-8"', true);
 		}
+
+		#error_log(strlen());
 
 		echo $GLOBALS['bump'];
 	});
@@ -36,16 +37,21 @@ if (!function_exists('bump')) {
 		debug_print_backtrace();
 
 		$response = ob_get_clean();
-		
+
 		// Convert control characters to hex representation.
 		// Refer to http://stackoverflow.com/a/8171868/368691
 		// @todo This implementation will not be able to represent pack('S', 65535).
-		$response = preg_replace_callback('/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u', function ($e) {
+		$response = mb_ereg_replace_callback('/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u', function ($e) {
 			return '\\' . bin2hex($e[0]);
 		}, $response);
-		
+
+		if ($response === false) {
+			throw new \ErrorException('PCRE error ocurred while stripping out non-printable characters.');
+			#var_dump( array_flip(get_defined_constants(true)['pcre'])[preg_last_error()] );
+		}
+
 		// Match everything that looks like a timestamp and convert it to a human readable date-time format.
-		$response = preg_replace_callback('/int\(([0-9]{10})\)/', function ($e) {
+		$response = mb_ereg_replace_callback('/int\(([0-9]{10})\)/', function ($e) {
 			return $e[0] . ' <== ' . date('Y-m-d H:i:s', $e[1]);
 		}, $response);
 		
