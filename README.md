@@ -32,10 +32,5 @@ Backtrace:
 
 ## Setup
 
-Use composer if you are planning to use Bump only with certain projects.
-
-However, since I use this function across all of my projects in the development environment, I prefer to have it available without definining the composer dependency. Therefore, I use [auto_prepend_file](http://uk1.php.net/manual/en/ini.core.php#ini.auto-prepend-file) setting to load `./src/gajus/bump/bump.php`.
-
-## Todo
-
-* How about integration with JavaScript console.log?
+* Use composer if you are planning to use Bump only with certain projects.
+* Use [auto_prepend_file](http://uk1.php.net/manual/en/ini.core.php#ini.auto-prepend-file) setting to load `./src/gajus/bump/bump.php` to make it available across the development environment.
