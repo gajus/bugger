@@ -32,5 +32,5 @@ Backtrace:
 
 ## Setup
 
-* Use composer if you are planning to use Bump only with certain projects.
+* Use [composer](https://packagist.org/packages/gajus/bump) if you are planning to use Bump only with certain projects.
 * Use [auto_prepend_file](http://uk1.php.net/manual/en/ini.core.php#ini.auto-prepend-file) setting to load `./src/gajus/bump/bump.php` to make it available across the development environment.
