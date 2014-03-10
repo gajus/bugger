@@ -16,9 +16,9 @@ if (!function_exists('bump')) {
 				ob_end_clean();
 			}
 
-			if (!headers_sent()) {
+			#if (!headers_sent()) {
 				header('Content-Type: text/plain; charset="UTF-8"', true);
-			}
+			#}
 		}
 
 		if (isset($GLOBALS['gajus']['bump'])) {
