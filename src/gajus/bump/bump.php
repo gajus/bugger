@@ -7,6 +7,8 @@ if (!function_exists('bump')) {
 			return;
 		}
 
+		echo PHP_EOL . 'Bump:' . PHP_EOL . PHP_EOL;
+
 		#var_dump(ob_get_level());
 
 		if (php_sapi_name() !== 'cli') {
@@ -14,7 +16,9 @@ if (!function_exists('bump')) {
 				ob_end_clean();
 			}
 
-			header('Content-Type: text/plain; charset="UTF-8"', true);
+			if (!headers_sent()) {
+				header('Content-Type: text/plain; charset="UTF-8"', true);
+			}
 		}
 
 		if (isset($GLOBALS['gajus']['bump'])) {
@@ -86,8 +90,8 @@ if (!function_exists('bump')) {
 	}
 
 	function mump () {
-		set_error_handler(function () {});
-		set_exception_handler(function () {});
+		#set_error_handler(function () { exit; });
+		#set_exception_handler(function () { exit; });
 
 		while (ob_get_level()) {
 			ob_end_clean();
