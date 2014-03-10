@@ -32,7 +32,7 @@ Backtrace:
 
 ## Mump
 
-Mump ("Multiple Dump") is similar to `dump` except that it will not stop the script execution. However, if `mump` is called, then at the end of script execution output will be flushed and replaced with dump of everything passed to `mump`, e.g.
+Mump ("Multiple Dump") is similar to `dump`, except it will not stop the script execution. However, if `mump` is called, then at the end of the script execution output will be flushed and replaced with dump of everything passed to `mump`, e.g.
 
 ```php
 <?php
@@ -68,7 +68,7 @@ Backtrace:
 
 ## Tick
 
-Tick is a helper to `bump`. Tick will return `true` when instance of the function is called a specified number of times, e.g.
+Tick will return `true` when it is called a specified number of times, e.g.
 
 ```php
 <?php
