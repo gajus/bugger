@@ -30,6 +30,67 @@ Backtrace:
 #0  bump(test, 1390850756) called at [/var/dev/gajus/bump/tests/bin/bump_test.php:4]
 ```
 
+## Mump
+
+Mump ("Multiple Dump") is similar to `dump` except that it will not stop the script execution. However, if `mump` is called, then at the end of script execution output will be flushed and replaced with dump of everything passed to `mump`, e.g.
+
+```php
+<?php
+echo 1;
+mump('a');
+echo 2;
+mump('b');
+echo 3;
+mump('c');
+```
+
+Will produce output:
+
+```
+string(1) "a"
+
+Backtrace:
+
+#0  mump(a) called at [/var/dev/gajus/bump/tests/bin/mump.php:3]
+
+string(1) "b"
+
+Backtrace:
+
+#0  mump(b) called at [/var/dev/gajus/bump/tests/bin/mump.php:5]
+
+string(1) "c"
+
+Backtrace:
+
+#0  mump(a) called at [/var/dev/gajus/bump/tests/bin/mump.php:7]
+```
+
+## Tick
+
+Tick is a helper to `bump`. Tick will return `true` when instance of the function is called a specified number of times, e.g.
+
+```php
+<?php
+$i = 100;
+
+while ($i--) {
+    if (tick(5)) {
+        bump($i);
+    }
+}
+```
+
+Will produce:
+
+```
+int(95)
+
+Backtrace:
+
+#0  bump(95) called at [/var/dev/gajus/bump/tests/bin/tick.php:6]
+```
+
 ## Setup
 
 * Use [composer](https://packagist.org/packages/gajus/bump) if you are planning to use Bump only with certain projects.
