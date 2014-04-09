@@ -21,6 +21,6 @@
 		"psr-4": {
 			"gajus\\": "src/"
 		},
-		"files": ["src/gajus/bump/bump.php"]
+		"files": ["src/bump.php"]
 	}
 }
