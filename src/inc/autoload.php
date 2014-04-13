@@ -27,4 +27,4 @@ register_shutdown_function(function () {
 	require __DIR__ . '/template.php';*/
 });
 
-require __DIR__ . '/Bugger.php';
+require __DIR__ . '/../Bugger.php';
