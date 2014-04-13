@@ -1,5 +1,6 @@
 {
 	"name": "gajus/bump",
+	"version": "0.1.0",
 	"description": "Bump (or \"Better Dump\") is a debugging tool to dump variable content excluding the existing buffer.",
 	"keywords": ["bump", "dump", "debug"],
 	"homepage": "https://github.com/gajus/bump",
@@ -12,7 +13,7 @@
 		}
 	],
 	"require": {
-		"php": ">=5.5"
+		"php": ">=5.4"
 	},
 	"require-dev": {
 	    "satooshi/php-coveralls": "dev-master"

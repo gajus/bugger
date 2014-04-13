@@ -1,35 +1,20 @@
 <?php
-if (!function_exists('bump')) {
-	ob_start();
+namespace Gajus\Bump;
 
-	register_shutdown_function(function () {
-		if (!isset($GLOBALS['gajus']['bump']) && !isset($GLOBALS['gajus']['mump'])) {
-			return;
-		}
-
-		if (php_sapi_name() !== 'cli') {
-			while (ob_get_level()) {
-				ob_end_clean();
-			}
-
-			if (!headers_sent()) {
-				header('Content-Type: text/html; charset="UTF-8"', true);
-			}
-		}
-
-		#if (isset($GLOBALS['gajus']['bump'])) {
-			$response = $GLOBALS['gajus']['bump'];
-		#} else {
-		#	$response = implode(PHP_EOL, $GLOBALS['gajus']['mump']);
-		#}
-
-		require __DIR__ . '/template.php';		
-	});
+/**
+ * 
+ * 
+ * @link https://github.com/gajus/bump for the canonical source repository
+ * @license https://github.com/gajus/bump/blob/master/LICENSE BSD 3-Clause
+ */
+class Bump {
+	static private
+		$ticks = [];
 
 	/**
 	 * Discard output buffer and dump information about the expressions.
 	 */
-	function bump () {
+	static public function bump () {
 		while (ob_get_level()) {
 			ob_end_clean();
 		}
@@ -47,7 +32,10 @@ if (!function_exists('bump')) {
 		exit;
 	}
 
-	/*function mump () {
+	/**
+	 *
+	 */
+	static public function mump () {
 		#set_error_handler(function () { exit; });
 		#set_exception_handler(function () { exit; });
 
@@ -68,22 +56,34 @@ if (!function_exists('bump')) {
 		ob_start();
 	}
 
-	function tick ($catch_at) {
-		if (!isset($GLOBALS['gajus']['tick'])) {
-			$GLOBALS['gajus']['tick'] = 0;
+	/**
+	 * Tick function is used to debug loop events. You can use it to stop loop at a specific itteration number.
+	 *
+	 * @param int $true_at Number of the itteration after which response is true.
+	 * @param string $namespace Itteration namespace.
+	 * @return boolean
+	 */
+	static public function tick ($true_at, $namespace = 'global') {
+		if (!isset(static::$ticks[$namespace])) {
+			static::$ticks[$namespace] = 0;
 		}
 
-		return ++$GLOBALS['gajus']['tick'] === $catch_at;
-	}*/
+		return ++static::$ticks[$namespace] === $true_at;
+	}
 
-	function bump_sanitise_output ($output) {
+	/**
+	 * Convert control characters to hex representation.
+	 * Refer to http://stackoverflow.com/a/8171868/368691
+	 * 
+	 * @todo This implementation will not be able to represent pack('S', 65535).
+	 * @param string $output
+	 * @return string
+	 */
+	static private function sanitise ($output) {
 		$regex_encoding = mb_regex_encoding();
 
 		mb_regex_encoding('UTF-8');
 
-		// Convert control characters to hex representation.
-		// Refer to http://stackoverflow.com/a/8171868/368691
-		// @todo This implementation will not be able to represent pack('S', 65535).
 		$output = \mb_ereg_replace_callback('[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]', function ($e) {
 		    return '\\' . bin2hex($e[0]);
 		}, $output);
@@ -94,9 +94,18 @@ if (!function_exists('bump')) {
 		    var_dump( array_flip(get_defined_constants(true)['pcre'])[preg_last_error()] );
 
 		    exit;
-		}
+		}		
 
-		// Match everything that looks like a timestamp and convert it to a human readable date-time format.
+		return $output;
+	}
+
+	/**
+	 * Match everything that looks like a timestamp and convert it to a human readable date-time format.
+	 * 
+	 * @param string $output
+	 * @return string
+	 */
+	static private function readableTimestamp ($output) {
 		$output = \mb_ereg_replace_callback('int\(([0-9]{10})\)', function ($e) {
 		    return $e[0] . ' <== ' . date('Y-m-d H:i:s', $e[1]);
 		}, $output);
@@ -112,11 +121,5 @@ if (!function_exists('bump')) {
 		mb_regex_encoding($regex_encoding);
 
 		return $output;
-	}
-
-	function bump_return_var_dump (array $args) {
-		ob_start();
-		call_user_func_array('var_dump', $args);
-		return ob_get_clean();
 	}
 }

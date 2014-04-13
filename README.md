@@ -3,6 +3,14 @@
 [![Build Status](https://travis-ci.org/gajus/bump.png?branch=master)](https://travis-ci.org/gajus/bump)
 [![Coverage Status](https://coveralls.io/repos/gajus/bump/badge.png)](https://coveralls.io/r/gajus/bump)
 
+Bump is a tool for debugging code. Bump is exposed via three functions.
+
+|Name|Description|
+|---|---|
+|`dump ( mixed $expression [, mixed $... ] )`|Dumps information about a variable.|
+|`sack ( mixed $expression [, mixed $... ] )`|Dumps information about all variables passed to sack funtion at the end of the script execution.|
+|`tick ( int $true_after [, string $namespace = 'default' ] )`|Counts number of function invocations and returns `true` when desired number is reached.|
+
 Bump (or "Better Dump") is a debugging tool to dump variable content excluding the existing buffer.
 
 ## Bells and whistles
