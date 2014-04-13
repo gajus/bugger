@@ -1,9 +1,9 @@
 {
-	"name": "gajus/bump",
+	"name": "gajus/bugger",
 	"version": "0.1.0",
 	"description": "Bump (or \"Better Dump\") is a debugging tool to dump variable content excluding the existing buffer.",
-	"keywords": ["bump", "dump", "debug"],
-	"homepage": "https://github.com/gajus/bump",
+	"keywords": ["bugger", "dump", "debug"],
+	"homepage": "https://github.com/gajus/bugger",
 	"type": "library",
 	"license": "BSD-3-Clause",
 	"authors": [
@@ -20,8 +20,8 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"gajus\\": "src/"
+			"Gajus\\Bugger\\": "src/"
 		},
-		"files": ["src/bump.php"]
+		"files": ["src/bugger.php"]
 	}
 }
