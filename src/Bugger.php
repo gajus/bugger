@@ -101,6 +101,8 @@ class Bugger {
             exit;
         }
 
+        mb_regex_encoding($regex_encoding);
+
         return $output;
     }
 
@@ -110,8 +112,14 @@ class Bugger {
      * @param string $output
      * @return string
      */
-    static private function readableTimestamp ($output) {
+    static private function translateTimestamp ($output) {
+        $regex_encoding = mb_regex_encoding();
+        
         $output = \mb_ereg_replace_callback('int\(([0-9]{10})\)', function ($e) {
+            if ($e[1] < mktime(0,0,0,1,1,2000) || $e[1] > mktime(0,0,0,1,1,2020)) {
+                return $e[0];
+            }
+
             return $e[0] . ' <== ' . date('Y-m-d H:i:s', $e[1]);
         }, $output);
 
