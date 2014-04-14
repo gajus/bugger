@@ -24,7 +24,10 @@ class Bugger {
 
         $backtrace = debug_backtrace();
 
-        $arguments = func_get_args();
+        if (isset($backtrace[1]) && $backtrace[0]['function'] === 'trace' && $backtrace[1]['function'] === 'forward_static_call_array') {
+            array_shift($backtrace);
+            array_shift($backtrace);
+        }
 
         $response = ['backtrace' => $backtrace];
 
@@ -81,7 +84,7 @@ class Bugger {
      * @param string $output
      * @return string
      */
-    static public function sanitise ($output) {
+    static private function sanitise ($output) {
         $regex_encoding = mb_regex_encoding();
 
         mb_regex_encoding('UTF-8');
@@ -107,7 +110,7 @@ class Bugger {
      * @param string $output
      * @return string
      */
-    /*static private function readableTimestamp ($output) {
+    static private function readableTimestamp ($output) {
         $output = \mb_ereg_replace_callback('int\(([0-9]{10})\)', function ($e) {
             return $e[0] . ' <== ' . date('Y-m-d H:i:s', $e[1]);
         }, $output);
@@ -123,7 +126,7 @@ class Bugger {
         mb_regex_encoding($regex_encoding);
 
         return $output;
-    }*/
+    }
 
     /**
      * @return array

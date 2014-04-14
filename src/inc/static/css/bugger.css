@@ -50,6 +50,8 @@ pre {
   #backtrace .syntaxhighlighter .line.highlighted.alt1, #backtrace .syntaxhighlighter .line.highlighted.alt2 {
     background-color: #cc1919 !important;
     color: #fff !important; }
+  #backtrace .syntaxhighlighter .gutter .line {
+    min-width: 20px; }
   #backtrace .syntaxhighlighter .gutter .line.highlighted {
     background-color: #cc1919 !important;
     color: #fff !important; }

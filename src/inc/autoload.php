@@ -2,6 +2,14 @@
 if (isset($GLOBALS['gajus']['bugger'])) {
 	return;
 } else {
+	function trace () {
+		return forward_static_call_array('Gajus\Bugger\Bugger::trace', func_get_args());
+	}
+
+	function stack () {
+		return forward_static_call_array('Gajus\Bugger\Bugger::stack', func_get_args());
+	}
+
 	function tick () {
 		return forward_static_call_array('Gajus\Bugger\Bugger::tick', func_get_args());
 	}

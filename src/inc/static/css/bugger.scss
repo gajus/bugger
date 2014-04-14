@@ -68,6 +68,10 @@ pre {
         color: #fff !important;
     }
 
+    .gutter .line {
+        min-width: 20px;
+    }
+
     .gutter .line.highlighted {
         background-color: #cc1919 !important;
         color: #fff !important;
