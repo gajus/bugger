@@ -94,11 +94,9 @@ class Bugger {
         }, $output);
 
         if ($output === false) {
-            throw new \ErrorException('PCRE error ocurred while stripping out non-printable characters.');
+            throw new Exception\ErrorException('PCRE error ocurred while stripping out non-printable characters.');
             
-            var_dump( array_flip(get_defined_constants(true)['pcre'])[preg_last_error()] );
-
-            exit;
+            # var_dump( array_flip(get_defined_constants(true)['pcre'])[preg_last_error()] );
         }
 
         mb_regex_encoding($regex_encoding);
@@ -114,7 +112,7 @@ class Bugger {
      */
     static private function translateTimestamp ($output) {
         $regex_encoding = mb_regex_encoding();
-        
+
         $output = \mb_ereg_replace_callback('int\(([0-9]{10})\)', function ($e) {
             if ($e[1] < mktime(0,0,0,1,1,2000) || $e[1] > mktime(0,0,0,1,1,2020)) {
                 return $e[0];
@@ -124,11 +122,9 @@ class Bugger {
         }, $output);
 
         if ($output === false) {
-            throw new \ErrorException('PCRE error ocurred while attempting to replace timestamp values with human-friedly format.');
+            throw new Exception\ErrorException('PCRE error ocurred while attempting to replace timestamp values with human-friedly format.');
             
-            var_dump( array_flip(get_defined_constants(true)['pcre'])[preg_last_error()] );
-
-            exit;
+            # var_dump( array_flip(get_defined_constants(true)['pcre'])[preg_last_error()] );
         }
 
         mb_regex_encoding($regex_encoding);
