@@ -66,6 +66,17 @@ In the above example, 'foo', 'bar', 'baz' and 'qux' will be discarded.
 tick ( int $true_after [, string $namespace = 'default' ] )
 ```
 
+Tick is used to debug script loops, recursive calls, etc. Tick itself does not dump values. Tick is used to construct the statement for whatever debugging purpose, e.g.
+
+```php
+while (true) {
+    if (tick(10)) {
+        // Tick will return true after 10 itterations.
+        break;
+    }
+}
+```
+
 ## Installation
 
 The recommended way to use Bugger is through Composer.
