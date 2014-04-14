@@ -68,7 +68,7 @@ In the above example, 'foo', 'bar', 'baz' and 'qux' will be discarded.
 tick ( int $true_after [, string $namespace = 'default' ] )
 ```
 
-Tick is used to debug script loops, recursive calls, etc. Tick itself does not dump values. Tick is used to construct the statement for whatever debugging purpose, e.g.
+`tick` is used to catch script execution in loop or recursive calls. `tick` returns `true` when it has been executed a predefined number of times or more, e.g.
 
 ```php
 while (true) {
@@ -77,6 +77,13 @@ while (true) {
         break;
     }
 }
+
+tick(4, 'test'); // false
+tick(4, 'test'); // false
+tick(4, 'test'); // false
+tick(4, 'test'); // true
+tick(4, 'test'); // true
+tick(4, 'test'); // true
 ```
 
 ## Installation

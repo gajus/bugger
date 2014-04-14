@@ -1,6 +1,6 @@
 {
 	"name": "gajus/bugger",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Bump (or \"Better Dump\") is a debugging tool to dump variable content excluding the existing buffer.",
 	"keywords": ["bugger", "dump", "debug"],
 	"homepage": "https://github.com/gajus/bugger",
