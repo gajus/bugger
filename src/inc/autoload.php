@@ -18,6 +18,10 @@ if (isset($GLOBALS['gajus']['bugger'])) {
 $GLOBALS['gajus']['bugger'] = [];
 
 register_shutdown_function(function () {
+	$stack = \Gajus\Bugger\Bugger::getStack();
+
+	require __DIR__ . '/template.php';
+
 	/*if (!isset($GLOBALS['gajus']['bump']) && !isset($GLOBALS['gajus']['mump'])) {
 		return;
 	}

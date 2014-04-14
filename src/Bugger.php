@@ -25,14 +25,13 @@ class Bugger {
 
         $backtrace = debug_backtrace();
 
-        if (isset($backtrace[1]) && $backtrace[0]['function'] === 'trace' && $backtrace[1]['function'] === 'forward_static_call_array') {
-            array_shift($backtrace);
-            array_shift($backtrace);
+        foreach ($backtrace as $i => $b) {
+            if (isset($backtrace[$i]['function'], $backtrace[$i + 1]['function']) && in_array($backtrace[$i]['function'], ['stack', 'trace', 'tick']) && $backtrace[$i + 1]['function'] === 'forward_static_call_array') {
+                unset($backtrace[$i], $backtrace[$i + 1]);
+            }
         }
 
-        $response = ['backtrace' => $backtrace];
-
-        require __DIR__ . '/inc/template.php';
+        static::$stack[] = $backtrace;
 
         exit;
     }
@@ -48,16 +47,16 @@ class Bugger {
         while (ob_get_level()) {
             ob_end_clean();
         }
-        
-        ob_start();
 
-        call_user_func_array('var_dump', func_get_args());
-        
-        echo PHP_EOL . 'Backtrace:' . PHP_EOL . PHP_EOL;
-        
-        debug_print_backtrace();
+        $backtrace = debug_backtrace();
 
-        static::$stack[] = ob_get_clean();
+        foreach ($backtrace as $i => $b) {
+            if (isset($backtrace[$i]['function'], $backtrace[$i + 1]['function']) && in_array($backtrace[$i]['function'], ['stack', 'trace', 'tick']) && $backtrace[$i + 1]['function'] === 'forward_static_call_array') {
+                unset($backtrace[$i], $backtrace[$i + 1]);
+            }
+        }
+
+        static::$stack[] = $backtrace;
 
         ob_start();
     }

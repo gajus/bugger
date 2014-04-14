@@ -7,7 +7,7 @@ html, body {
   font-size: 13px;
   background: #C4C9DF; }
 
-#backtrace {
+.stack {
   display: block;
   margin: 20px;
   /*.code,
@@ -18,18 +18,18 @@ html, body {
     .args.min {
         max-height: 200px; overflow: hidden;
     }*/ }
-  #backtrace li {
+  .stack li {
     display: block;
     list-style: none;
     margin: 0 0 10px 0;
     padding: 10px;
     overflow: hidden;
     background: #fff; }
-  #backtrace .location {
+  .stack .location {
     padding: 10px;
     background: #4F5B93;
     color: #fff; }
-  #backtrace .code {
+  .stack .code {
     background: #F8EEC7;
     padding: 20px;
     word-wrap: break-word;
@@ -42,22 +42,23 @@ pre {
     word-wrap: break-word; white-space: pre-wrap;
 }
  */
-#backtrace .syntaxhighlighter {
+.stack .syntaxhighlighter {
   background: #F8EEC7;
   margin: 10px 0 0 0 !important; }
-  #backtrace .syntaxhighlighter a, #backtrace .syntaxhighlighter div, #backtrace .syntaxhighlighter code, #backtrace .syntaxhighlighter table, #backtrace .syntaxhighlighter table td, #backtrace .syntaxhighlighter table tr, #backtrace .syntaxhighlighter table tbody, #backtrace .syntaxhighlighter table thead, #backtrace .syntaxhighlighter table caption, #backtrace .syntaxhighlighter textarea {
+  .stack .syntaxhighlighter a, .stack .syntaxhighlighter div, .stack .syntaxhighlighter code, .stack .syntaxhighlighter table, .stack .syntaxhighlighter table td, .stack .syntaxhighlighter table tr, .stack .syntaxhighlighter table tbody, .stack .syntaxhighlighter table thead, .stack .syntaxhighlighter table caption, .stack .syntaxhighlighter textarea {
     line-height: 20px !important; }
-  #backtrace .syntaxhighlighter .line.highlighted.alt1, #backtrace .syntaxhighlighter .line.highlighted.alt2 {
+  .stack .syntaxhighlighter .line.highlighted.alt1, .stack .syntaxhighlighter .line.highlighted.alt2 {
     background-color: #cc1919 !important;
     color: #fff !important; }
-  #backtrace .syntaxhighlighter .gutter .line {
-    min-width: 20px; }
-  #backtrace .syntaxhighlighter .gutter .line.highlighted {
-    background-color: #cc1919 !important;
-    color: #fff !important; }
-  #backtrace .syntaxhighlighter .line {
+  .stack .syntaxhighlighter .line {
     background: #eee !important; }
-  #backtrace .syntaxhighlighter .line.highlighted code {
-    color: #fff !important; }
-  #backtrace .syntaxhighlighter .gutter .line {
-    border-right: 3px solid #cc1919 !important; }
+    .stack .syntaxhighlighter .line.highlighted code {
+      color: #fff !important; }
+  .stack .syntaxhighlighter .gutter .line {
+    background-color: #e0e0e0 !important;
+    min-width: 20px;
+    border-right: 3px solid #EEE !important; }
+    .stack .syntaxhighlighter .gutter .line.highlighted {
+      background-color: #cc1919 !important;
+      color: #fff !important;
+      border-right-color: #cc1919 !important; }

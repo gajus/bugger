@@ -12,7 +12,7 @@ body {
     font-family: monospace; font-size: 13px; background: #C4C9DF;
 }
 
-#backtrace {
+.stack {
     display: block; margin: 20px;
 
     li {
@@ -46,7 +46,7 @@ pre {
  */
 
 
-#backtrace .syntaxhighlighter {
+.stack .syntaxhighlighter {
     background: #F8EEC7; margin: 10px 0 0 0!important;
 
     a,
@@ -68,24 +68,21 @@ pre {
         color: #fff !important;
     }
 
-    .gutter .line {
-        min-width: 20px;
-    }
-
-    .gutter .line.highlighted {
-        background-color: #cc1919 !important;
-        color: #fff !important;
-    }
-
     .line {
         background: #eee!important;
-    }
 
-    .line.highlighted code {
-        color: #fff !important;
+        &.highlighted {
+            code {
+                color: #fff !important;
+            }
+        }
     }
 
     .gutter .line {
-        border-right: 3px solid #cc1919 !important;
+        background-color: #e0e0e0 !important; min-width: 20px; border-right: 3px solid #EEE !important;
+
+        &.highlighted {
+            background-color: #cc1919 !important; color: #fff !important; border-right-color: #cc1919 !important;
+        }
     }
 }
