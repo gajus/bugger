@@ -23,15 +23,7 @@ class Bugger {
             ob_end_clean();
         }
 
-        $backtrace = debug_backtrace();
-
-        foreach ($backtrace as $i => $b) {
-            if (isset($backtrace[$i]['function'], $backtrace[$i + 1]['function']) && in_array($backtrace[$i]['function'], ['stack', 'trace', 'tick']) && $backtrace[$i + 1]['function'] === 'forward_static_call_array') {
-                unset($backtrace[$i], $backtrace[$i + 1]);
-            }
-        }
-
-        static::$stack[] = $backtrace;
+        static::$stack[] = static::getBacktrace();
 
         exit;
     }
@@ -48,15 +40,7 @@ class Bugger {
             ob_end_clean();
         }
 
-        $backtrace = debug_backtrace();
-
-        foreach ($backtrace as $i => $b) {
-            if (isset($backtrace[$i]['function'], $backtrace[$i + 1]['function']) && in_array($backtrace[$i]['function'], ['stack', 'trace', 'tick']) && $backtrace[$i + 1]['function'] === 'forward_static_call_array') {
-                unset($backtrace[$i], $backtrace[$i + 1]);
-            }
-        }
-
-        static::$stack[] = $backtrace;
+        static::$stack[] = static::getBacktrace();
 
         ob_start();
     }
@@ -75,6 +59,29 @@ class Bugger {
         }
 
         return ++static::$ticks[$namespace] >= $true_after;
+    }
+
+    /**
+     * @return array
+     * @codeCoverageIgnore
+     */
+    static private function getBacktrace () {
+        $backtrace = debug_backtrace();
+
+        foreach ($backtrace as $i => $b) {
+            if (isset($backtrace[$i]['function'], $backtrace[$i + 1]['function']) && in_array($backtrace[$i]['function'], ['stack', 'trace', 'tick']) && $backtrace[$i + 1]['function'] === 'forward_static_call_array') {
+                unset($backtrace[$i - 1], $backtrace[$i], $backtrace[$i + 1]);
+            } else if (isset($backtrace[$i])) {
+                ob_start();
+                var_dump($backtrace[$i]['args']);
+                $backtrace[$i]['args'] = htmlspecialchars(ob_get_clean());
+
+                $backtrace[$i]['args'] = static::sanitise($backtrace[$i]['args']);
+                $backtrace[$i]['args'] = static::translateTimestamp($backtrace[$i]['args']);
+            }
+        }
+
+        return $backtrace;
     }
 
     /**
