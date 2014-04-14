@@ -74,10 +74,10 @@ class Bugger {
             } else if (isset($backtrace[$i])) {
                 ob_start();
                 var_dump($backtrace[$i]['args']);
-                $backtrace[$i]['args'] = htmlspecialchars(ob_get_clean());
+                $backtrace[$i]['args_dump'] = htmlspecialchars(ob_get_clean());
 
-                $backtrace[$i]['args'] = static::sanitise($backtrace[$i]['args']);
-                $backtrace[$i]['args'] = static::translateTimestamp($backtrace[$i]['args']);
+                $backtrace[$i]['args_dump'] = static::sanitise($backtrace[$i]['args_dump']);
+                $backtrace[$i]['args_dump'] = static::translateTimestamp($backtrace[$i]['args_dump']);
             }
         }
 

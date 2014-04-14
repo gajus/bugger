@@ -40,11 +40,7 @@
 			<pre class="brush: php; highlight: <?=$t['line']?>; first-line: <?=max($t['line'] - 2, 1)?>;"><?=htmlspecialchars(implode($file, "\n"))?></pre>
 			<?php endif;?>
 			
-			<pre class="brush: php;"><?php
-			ob_start();
-			var_dump($t['args']);
-			echo  htmlspecialchars(ob_get_clean());
-			?></pre>
+			<pre class="brush: php;"><?=$t['args_dump']?></pre>
 		</li>
 		<?php endforeach;?>
 	</ol>
