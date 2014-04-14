@@ -26,6 +26,8 @@ trace ( mixed $expression )
 
 Trace is used to dump information about the expression including the backtrace information. Trace will attempt to discard existing output buffer. If output buffer cannot be discaded because it has been already sent to the browser, then Bugger will attempt to clear the previous output using client-side script.
 
+![Trace output](./docs/static/image/trace.png)
+
 ### Stack
 
 ```php
