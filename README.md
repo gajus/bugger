@@ -1,7 +1,7 @@
 # Bugger
 
 [![Build Status](https://travis-ci.org/gajus/bugger.png?branch=master)](https://travis-ci.org/gajus/bugger)
-[![Coverage Status](https://coveralls.io/repos/gajus/bugger/badge.png)](https://coveralls.io/r/gajus/bugger)
+[![Coverage Status](https://coveralls.io/repos/gajus/bugger/badge.png?branch=master)](https://coveralls.io/r/gajus/bugger?branch=master)
 
 Bugger is a collection of functions for debugging PHP code. Use it to:
 
