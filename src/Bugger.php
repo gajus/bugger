@@ -7,40 +7,40 @@ namespace Gajus\Bugger;
  * @license https://github.com/gajus/bump/blob/master/LICENSE BSD 3-Clause
  */
 class Bugger {
-	static private
-		$stack = [],
+    static private
+        $stack = [],
         $ticks = [];
 
-	/**
-	 * Terminates the script, discards the output buffer, dumps information about the expression including backtrace up to the `trace` call.
-	 * 
-	 * @param mixed $expression The variable you want to dump.
-	 * @return null
-	 */
-	static public function trace ($expression = null) {
-		while (ob_get_level()) {
-			ob_end_clean();
-		}
+    /**
+     * Terminates the script, discards the output buffer, dumps information about the expression including backtrace up to the `trace` call.
+     * 
+     * @param mixed $expression The variable you want to dump.
+     * @return null
+     */
+    static public function trace ($expression = null) {
+        while (ob_get_level()) {
+            ob_end_clean();
+        }
 
-		$backtrace = debug_backtrace();
+        $backtrace = debug_backtrace();
 
-		$arguments = func_get_args();
+        $arguments = func_get_args();
 
-		$response = ['backtrace' => $backtrace];
+        $response = ['backtrace' => $backtrace];
 
-		require __DIR__ . '/inc/template.php';
+        require __DIR__ . '/inc/template.php';
 
-		exit;
-	}
+        exit;
+    }
 
-	/**
-	 * Stacks information about the expression and dumps the stack at the end of the script execution.
-	 *
-	 * @param mixed $expression The variable you want to dump.
-	 * @return null
-	 */
-	static public function stack ($expression = null) {
-		while (ob_get_level()) {
+    /**
+     * Stacks information about the expression and dumps the stack at the end of the script execution.
+     *
+     * @param mixed $expression The variable you want to dump.
+     * @return null
+     */
+    static public function stack ($expression = null) {
+        while (ob_get_level()) {
             ob_end_clean();
         }
         
@@ -55,9 +55,9 @@ class Bugger {
         static::$stack[] = ob_get_clean();
 
         ob_start();
-	}
+    }
 
-	/**
+    /**
      * Tracks the number of times tick function itself has been called and returns true
      * when the desired number within the namespace is reached.
      *
@@ -81,7 +81,7 @@ class Bugger {
      * @param string $output
      * @return string
      */
-    static private function sanitise ($output) {
+    static public function sanitise ($output) {
         $regex_encoding = mb_regex_encoding();
 
         mb_regex_encoding('UTF-8');
@@ -129,7 +129,7 @@ class Bugger {
      * @return array
      */
     static public function getStack () {
-    	return static::$stack;
+        return static::$stack;
     }
 
     static public function resetTick () {
