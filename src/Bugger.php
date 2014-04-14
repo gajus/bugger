@@ -70,7 +70,7 @@ class Bugger {
             static::$ticks[$namespace] = 0;
         }
 
-        return ++static::$ticks[$namespace] === $true_after;
+        return ++static::$ticks[$namespace] >= $true_after;
     }
 
     /**
@@ -130,5 +130,9 @@ class Bugger {
      */
     static public function getStack () {
     	return static::$stack;
+    }
+
+    static public function resetTick () {
+        static::$ticks = [];
     }
 }
