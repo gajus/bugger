@@ -36,6 +36,10 @@ class Bugger {
 
 		#$GLOBALS['gajus']['bump'] = ['backtrace' => debug_backtrace(), 'var_dump' => $var_dump];
 
+		$response = ['backtrace' => $backtrace];
+
+		require __DIR__ . '/inc/template.php';
+
 		exit;
 	}
 }

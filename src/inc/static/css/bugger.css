@@ -1,0 +1,61 @@
+html, body, pre, ol, li, pre {
+  margin: 0;
+  padding: 0; }
+
+html, body {
+  font-family: monospace;
+  font-size: 13px;
+  background: #C4C9DF; }
+
+#backtrace {
+  display: block;
+  margin: 20px;
+  /*.code,
+    .args { background: #D4D4D4; color: #000; padding: 20px; }
+
+    .code { background: #F8EEC7; cursor: pointer; }
+
+    .args.min {
+        max-height: 200px; overflow: hidden;
+    }*/ }
+  #backtrace li {
+    display: block;
+    list-style: none;
+    margin: 0 0 10px 0;
+    padding: 10px;
+    overflow: hidden;
+    background: #fff; }
+  #backtrace .location {
+    padding: 10px;
+    background: #4F5B93;
+    color: #fff; }
+  #backtrace .code {
+    background: #F8EEC7;
+    padding: 20px;
+    word-wrap: break-word;
+    white-space: pre-wrap; }
+
+/* red: cc1919
+
+
+pre {
+    word-wrap: break-word; white-space: pre-wrap;
+}
+ */
+#backtrace .syntaxhighlighter {
+  background: #F8EEC7;
+  margin: 10px 0 0 0 !important; }
+  #backtrace .syntaxhighlighter a, #backtrace .syntaxhighlighter div, #backtrace .syntaxhighlighter code, #backtrace .syntaxhighlighter table, #backtrace .syntaxhighlighter table td, #backtrace .syntaxhighlighter table tr, #backtrace .syntaxhighlighter table tbody, #backtrace .syntaxhighlighter table thead, #backtrace .syntaxhighlighter table caption, #backtrace .syntaxhighlighter textarea {
+    line-height: 20px !important; }
+  #backtrace .syntaxhighlighter .line.highlighted.alt1, #backtrace .syntaxhighlighter .line.highlighted.alt2 {
+    background-color: #cc1919 !important;
+    color: #fff !important; }
+  #backtrace .syntaxhighlighter .gutter .line.highlighted {
+    background-color: #cc1919 !important;
+    color: #fff !important; }
+  #backtrace .syntaxhighlighter .line {
+    background: #eee !important; }
+  #backtrace .syntaxhighlighter .line.highlighted code {
+    color: #fff !important; }
+  #backtrace .syntaxhighlighter .gutter .line {
+    border-right: 3px solid #cc1919 !important; }

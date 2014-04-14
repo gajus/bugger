@@ -2,76 +2,50 @@
 <html>
 <head>
 	<style>
-	html,
-	body {
-		font-family: monospace; font-size: 13px; background: #D4D4D4; margin: 0; padding: 0 0 0 50px;
-	}
-
-	pre {
-		word-wrap: break-word; white-space: pre-wrap;
-	}
-
-	#backtrace {
-		display: block; margin: 0; padding: 0; background: #fff;
-	}
-
-	#backtrace li {
-		display: block; list-style: none; margin: 0; padding: 10px; overflow: hidden; border-bottom: 1px solid #D4D4D4;
-	}
-
-	/*#backtrace li:first-child { background: #4288CE; color: #fff; }
-
-	#dump {
-		margin: 40px; display: block;
-	}*/
-
-	.location {
-		padding: 20px; background: #666699; color: #fff;
-	}
-
-	.code,
-	.args { background: #D4D4D4; color: #000; padding: 20px; }
-
-	.code { background: #F8EEC7; cursor: pointer; }
-
-	.args.min {
-		max-height: 200px; overflow: hidden;
-	}
+	<?=file_get_contents(__DIR__ . '/static/js/syntaxhighlighter/styles/shCore.css')?>
+	<?=file_get_contents(__DIR__ . '/static/js/syntaxhighlighter/styles/shCoreDefault.css')?>
+	<?=file_get_contents(__DIR__ . '/static/css/bugger.css')?>
 	</style>
 
 	<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 	<script>
-	$(function () {
-		$('.code').on('click', function () {
-			var argsContainer = $(this).parents('li').find('.args');
+	<?=file_get_contents(__DIR__ . '/static/js/bugger.js')?>
 
-			argsContainer.toggleClass('min');
-		});
-	});
+	<?=file_get_contents(__DIR__ . '/static/js/syntaxhighlighter/scripts/shCore.js')?>
+	<?=file_get_contents(__DIR__ . '/static/js/syntaxhighlighter/scripts/shBrushPhp.js')?>
 	</script>
 </head>
 <body>
-	<div id="aux">
-		<ol id="backtrace">
-			<?php
-			foreach ($response['backtrace'] as $trace) {
-				?>
-				<li>
-				<?php if (isset($trace['file'])):?>
-					<div class="location">
-						<span class="file">../<?=explode('/', mb_substr($trace['file'], -80), 2)[1]?></span>
-						:<span class="line"><?=$trace['line']?></span>
-					</div>
-					<div class="code"><?=htmlspecialchars(trim(file($trace['file'])[$trace['line'] - 1]))?></div>
-					<pre class="args min"><?=htmlspecialchars(bump_return_var_dump($trace['args']))?></pre>
-				<?php endif;?>
-				</li>
-				<?php
-		        #echo '<li>' . $trace['file'] . '(' . $trace['line'] . '): ' . (isset($trace['class']) ? $trace['class'] . '->' : '') . $trace['function'] . '(' . implode(', ', $trace['args']) . ') </li>'; 
-			}
+	<ol id="backtrace">
+		<?php foreach ($response['backtrace'] as $trace):?>
+		<li>
+			<?php if (isset($trace['file'])):
+
+			$file = file($trace['file']);
+			$file = array_slice($file, max($trace['line'] - 3, 0), 5);
+			$file = array_map('rtrim', $file);
+			$file = array_map(function ($e) { return $e ? $e : '// test'; }, $file);
+			#die(var_dump($file));
 			?>
-		</ol>
-	</div>
+			<div class="location">
+				<span class="file">../<?=explode('/', mb_substr($trace['file'], -80), 2)[1]?></span>:<span class="line"><?=$trace['line']?></span>
+			</div>
+			<pre class="brush: php; highlight: <?=$trace['line']?>; first-line: <?=max($trace['line'] - 2, 1)?>;"><?=htmlspecialchars(implode($file, "\n"))?></pre>
+			<?php endif;?>
+			
+			<pre class="brush: php;"><?php
+			ob_start();
+			var_dump($trace['args']);
+			echo  htmlspecialchars(ob_get_clean());
+			?></pre>
+		</li>
+		<?php endforeach;?>
+	</ol>
+
+	<script>
+	SyntaxHighlighter.defaults.toolbar = false;
+	SyntaxHighlighter.all();
+	</script>
 </body>
 </html>
