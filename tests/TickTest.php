@@ -9,6 +9,6 @@ class TickTest extends PHPUnit_Framework_TestCase {
             }
         }
 
-        $this->assertCount(900, $i);
+        $this->assertSame(900, $i);
     }
 }

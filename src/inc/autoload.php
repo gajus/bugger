@@ -1,6 +1,10 @@
 <?php
 if (isset($GLOBALS['gajus']['bugger'])) {
 	return;
+} else {
+	function tick () {
+		return forward_static_call_array('Gajus\Bugger\Bugger::tick', func_get_args());
+	}
 }
 
 $GLOBALS['gajus']['bugger'] = [];

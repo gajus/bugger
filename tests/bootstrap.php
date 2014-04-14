@@ -1,2 +1,2 @@
 <?php
-require __DIR__ . '/../src/gajus/bump/bump.php';
+require __DIR__ . '/../vendor/autoload.php';

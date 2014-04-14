@@ -8,7 +8,8 @@ namespace Gajus\Bugger;
  */
 class Bugger {
 	static private
-		$stack = [];
+		$stack = [],
+        $ticks = [];
 
 	/**
 	 * Terminates the script, discards the output buffer, dumps information about the expression including backtrace up to the `trace` call.
@@ -95,7 +96,7 @@ class Bugger {
             var_dump( array_flip(get_defined_constants(true)['pcre'])[preg_last_error()] );
 
             exit;
-        }       
+        }
 
         return $output;
     }
