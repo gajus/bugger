@@ -25,8 +25,7 @@
 			$file = file($trace['file']);
 			$file = array_slice($file, max($trace['line'] - 3, 0), 5);
 			$file = array_map('rtrim', $file);
-			$file = array_map(function ($e) { return $e ? $e : '// test'; }, $file);
-			#die(var_dump($file));
+			$file = array_map(function ($e) { return $e ? $e : '	'; }, $file);
 			?>
 			<div class="location">
 				<span class="file">../<?=explode('/', mb_substr($trace['file'], -80), 2)[1]?></span>:<span class="line"><?=$trace['line']?></span>

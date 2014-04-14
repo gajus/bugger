@@ -1,6 +1,6 @@
 <?php
-class BumpTest extends PHPUnit_Framework_TestCase {
-    public function testEscapeOpenBuffer () {
+class DumpTest extends PHPUnit_Framework_TestCase {
+    /*public function testEscapeOpenBuffer () {
         $output = str_replace(__DIR__, '.', shell_exec('php "' . __DIR__ . '/bin/bump_escape_open_buffer.php"'));
 
         $expected_output = 'string(4) "test"
@@ -40,6 +40,6 @@ Backtrace:
 ';
 
         $this->assertSame($expected_output, $output);
-    }
+    }*/
 }
 

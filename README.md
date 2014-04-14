@@ -10,34 +10,45 @@ Bugger is a collection of functions for debugging PHP code. Use it to:
 
 ## API
 
-### Dump
+### Trace
 
 ```php
-Bugger::dump ( mixed $expression [, mixed $... ] )
+/**
+ * Terminates the script, discards the output buffer, dumps information about the expression including backtrace up to the `trace` call.
+ * 
+ * @param mixed $expression The variable you want to dump.
+ * @return null
+ */
+trace ( mixed $expression )
 ````
 
-Dumps information about a variable.
-
-
-
-* Bump will convert non-printable (control) characters (characters that would force browser to download output as `application/octet-stream`) to their hexadecimal presentation.
-* Bump will human-readable version of each UNIX timestamp.
-
-### Sack
+### Stack
 
 ```php
-Bugger::sack ( mixed $expression [, mixed $... ] )
+/**
+ * Stacks information about the expression and dumps the stack at the end of the script execution.
+ *
+ * @param mixed $expression The variable you want to dump.
+ * @return null
+ */
+stack ( mixed $expression )
 ```
 
-Dumps information about all variables passed to sack funtion at the end of the script execution.
+
 
 ### Tick
 
 ```php
-Bugger::tick ( int $true_after [, string $namespace = 'default' ] )
+/**
+ * Tracks the number of times tick function itself has been called and returns true
+ * when the desired number within the namespace is reached.
+ *
+ * @param int $true_after Number of the itteration after which response is true.
+ * @param string $namespace Itteration namespace.
+ * @return boolean
+ */
+tick ( int $true_after [, string $namespace = 'default' ] )
 ```
-
-Counts number of function invocations and returns `true` when desired number is reached.
 
 ## Installation
 
