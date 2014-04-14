@@ -93,7 +93,7 @@ The recommended way to use Bugger is through Composer.
 ```json
 {
     "require": {
-       "gajus/bugger": "0.1.*"
+       "gajus/bugger": "0.2.*"
     }
 }
 ```
