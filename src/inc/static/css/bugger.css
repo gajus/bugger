@@ -5,11 +5,17 @@ html, body, pre, ol, li, pre {
 html, body {
   font-family: monospace;
   font-size: 13px;
-  background: #C4C9DF; }
+  background: #C4C9DF;
+  width: 9000px; }
+
+#bugger {
+  padding: 0 10px 10px 0; }
 
 .stack {
   display: block;
-  margin: 20px;
+  margin: 10px 0 0 10px;
+  width: 500px;
+  float: left;
   /*.code,
     .args { background: #D4D4D4; color: #000; padding: 20px; }
 
@@ -22,18 +28,37 @@ html, body {
     display: block;
     list-style: none;
     margin: 0 0 10px 0;
-    padding: 10px;
     overflow: hidden;
-    background: #fff; }
+    background: #fff;
+    border: 1px solid #999; }
   .stack .location {
     padding: 10px;
-    background: #4F5B93;
-    color: #fff; }
+    color: #111; }
   .stack .code {
     background: #F8EEC7;
     padding: 20px;
     word-wrap: break-word;
     white-space: pre-wrap; }
+  .stack .syntaxhighlighter {
+    margin: 0 !important;
+    border-top: 3px solid #4F5B93; }
+    .stack .syntaxhighlighter a, .stack .syntaxhighlighter div, .stack .syntaxhighlighter code, .stack .syntaxhighlighter table, .stack .syntaxhighlighter table td, .stack .syntaxhighlighter table tr, .stack .syntaxhighlighter table tbody, .stack .syntaxhighlighter table thead, .stack .syntaxhighlighter table caption, .stack .syntaxhighlighter textarea {
+      line-height: 20px !important; }
+    .stack .syntaxhighlighter .line {
+      background: #fff !important; }
+      .stack .syntaxhighlighter .line.highlighted code {
+        color: #fff !important; }
+      .stack .syntaxhighlighter .line.highlighted.alt1, .stack .syntaxhighlighter .line.highlighted.alt2 {
+        background-color: #cc1919 !important;
+        color: #fff !important; }
+    .stack .syntaxhighlighter .gutter .line {
+      background-color: #e0e0e0 !important;
+      min-width: 20px;
+      border-right: 3px solid #EEE !important; }
+      .stack .syntaxhighlighter .gutter .line.highlighted {
+        background-color: #cc1919 !important;
+        color: #fff !important;
+        border-right-color: #cc1919 !important; }
 
 /* red: cc1919
 
@@ -42,23 +67,3 @@ pre {
     word-wrap: break-word; white-space: pre-wrap;
 }
  */
-.stack .syntaxhighlighter {
-  background: #F8EEC7;
-  margin: 10px 0 0 0 !important; }
-  .stack .syntaxhighlighter a, .stack .syntaxhighlighter div, .stack .syntaxhighlighter code, .stack .syntaxhighlighter table, .stack .syntaxhighlighter table td, .stack .syntaxhighlighter table tr, .stack .syntaxhighlighter table tbody, .stack .syntaxhighlighter table thead, .stack .syntaxhighlighter table caption, .stack .syntaxhighlighter textarea {
-    line-height: 20px !important; }
-  .stack .syntaxhighlighter .line.highlighted.alt1, .stack .syntaxhighlighter .line.highlighted.alt2 {
-    background-color: #cc1919 !important;
-    color: #fff !important; }
-  .stack .syntaxhighlighter .line {
-    background: #eee !important; }
-    .stack .syntaxhighlighter .line.highlighted code {
-      color: #fff !important; }
-  .stack .syntaxhighlighter .gutter .line {
-    background-color: #e0e0e0 !important;
-    min-width: 20px;
-    border-right: 3px solid #EEE !important; }
-    .stack .syntaxhighlighter .gutter .line.highlighted {
-      background-color: #cc1919 !important;
-      color: #fff !important;
-      border-right-color: #cc1919 !important; }

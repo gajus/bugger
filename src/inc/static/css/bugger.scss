@@ -9,18 +9,22 @@ pre {
 
 html,
 body {
-    font-family: monospace; font-size: 13px; background: #C4C9DF;
+    font-family: monospace; font-size: 13px; background: #C4C9DF; width: 9000px;
+}
+
+#bugger {
+    padding: 0 10px 10px 0;
 }
 
 .stack {
-    display: block; margin: 20px;
+    display: block; margin: 10px 0 0 10px; width: 500px; float: left;
 
     li {
-        display: block; list-style: none; margin: 0 0 10px 0; padding: 10px; overflow: hidden; background: #fff;
+        display: block; list-style: none; margin: 0 0 10px 0; overflow: hidden; background: #fff; border: 1px solid #999;
     }
 
     .location {
-        padding: 10px; background: #4F5B93; color: #fff;
+        padding: 10px; color: #111;
     }
 
     .code {
@@ -35,6 +39,52 @@ body {
     .args.min {
         max-height: 200px; overflow: hidden;
     }*/
+
+    .syntaxhighlighter {
+        margin: 0!important; border-top: 3px solid #4F5B93;
+
+        a,
+        div,
+        code,
+        table,
+        table td,
+        table tr,
+        table tbody,
+        table thead,
+        table caption,
+        textarea {
+            line-height: 20px !important;
+        }
+
+        .line {
+            background: #fff!important;
+
+            &.alt1 {  }
+            &.alt2 {  }
+
+            &.highlighted {
+                code {
+                    color: #fff !important;
+                }
+
+                &.alt1,
+                &.alt2 {
+                    background-color: #cc1919 !important;
+                    color: #fff !important;
+                }
+            }
+
+            
+        }
+
+        .gutter .line {
+            background-color: #e0e0e0 !important; min-width: 20px; border-right: 3px solid #EEE !important;
+
+            &.highlighted {
+                background-color: #cc1919 !important; color: #fff !important; border-right-color: #cc1919 !important;
+            }
+        }
+    }
 }
 
 /* red: cc1919
@@ -44,45 +94,3 @@ pre {
     word-wrap: break-word; white-space: pre-wrap;
 }
  */
-
-
-.stack .syntaxhighlighter {
-    background: #F8EEC7; margin: 10px 0 0 0!important;
-
-    a,
-    div,
-    code,
-    table,
-    table td,
-    table tr,
-    table tbody,
-    table thead,
-    table caption,
-    textarea {
-        line-height: 20px !important;
-    }
-
-    .line.highlighted.alt1,
-    .line.highlighted.alt2 {
-        background-color: #cc1919 !important;
-        color: #fff !important;
-    }
-
-    .line {
-        background: #eee!important;
-
-        &.highlighted {
-            code {
-                color: #fff !important;
-            }
-        }
-    }
-
-    .gutter .line {
-        background-color: #e0e0e0 !important; min-width: 20px; border-right: 3px solid #EEE !important;
-
-        &.highlighted {
-            background-color: #cc1919 !important; color: #fff !important; border-right-color: #cc1919 !important;
-        }
-    }
-}
