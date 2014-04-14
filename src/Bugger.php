@@ -16,6 +16,7 @@ class Bugger {
      * 
      * @param mixed $expression The variable you want to dump.
      * @return null
+     * @codeCoverageIgnore
      */
     static public function trace ($expression = null) {
         while (ob_get_level()) {
@@ -41,6 +42,7 @@ class Bugger {
      *
      * @param mixed $expression The variable you want to dump.
      * @return null
+     * @codeCoverageIgnore
      */
     static public function stack ($expression = null) {
         while (ob_get_level()) {
