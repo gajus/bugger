@@ -10,6 +10,8 @@ Bugger is a collection of functions for debugging PHP code. Use it to:
 
 ## API
 
+Bugger API is exposed to the global namespace via three functions:
+
 ### Trace
 
 ```php
@@ -21,6 +23,8 @@ Bugger is a collection of functions for debugging PHP code. Use it to:
  */
 trace ( mixed $expression )
 ````
+
+Trace is used to dump information about the expression including the backtrace information. Trace will attempt to discard existing output buffer. If output buffer cannot be discaded because it has been already sent to the browser, then Bugger will attempt to clear the previous output using client-side script.
 
 ### Stack
 
@@ -34,7 +38,19 @@ trace ( mixed $expression )
 stack ( mixed $expression )
 ```
 
+Stack is identical to `trace` except that calling `stack` will not terminate the script at the time of the call. If `stack` is called at least once during the script execution, then at the end of the script execution output buffer will be discarded and replaced with the collected `stack` dump, e.g.
 
+```php
+echo 'foo';
+stack('a');
+echo 'bar';
+stack('b');
+echo 'baz';
+stack('c');
+echo 'qux';
+```
+
+In the above example, 'foo', 'bar', 'baz' and 'qux' will be discarded.
 
 ### Tick
 
