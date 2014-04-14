@@ -1,7 +1,7 @@
 {
 	"name": "gajus/bugger",
 	"version": "0.2.0",
-	"description": "Bump (or \"Better Dump\") is a debugging tool to dump variable content excluding the existing buffer.",
+	"description": "Bugger is a collection of functions for debugging PHP code.",
 	"keywords": ["bugger", "dump", "debug"],
 	"homepage": "https://github.com/gajus/bugger",
 	"type": "library",
