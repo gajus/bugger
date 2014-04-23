@@ -88,7 +88,7 @@ tick(4, 'test'); // true
 tick(4, 'test'); // true
 ```
 
-![Tick output](./docs/static/image/stack.png)
+![Tick output](./docs/static/image/tick.png)
 
 ## Installation
 
