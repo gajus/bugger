@@ -53,7 +53,7 @@ class Bugger {
      * @param string $namespace Itteration namespace.
      * @return boolean
      */
-    static public function tick ($true_after, $namespace = 'default') {
+    static public function tick ($true_after = 0, $namespace = 'default') {
         if (!isset(static::$ticks[$namespace])) {
             static::$ticks[$namespace] = 0;
         }

@@ -88,6 +88,8 @@ tick(4, 'test'); // true
 tick(4, 'test'); // true
 ```
 
+![Tick output](./docs/static/image/stack.png)
+
 ## Installation
 
 The recommended way to use Bugger is through Composer.
