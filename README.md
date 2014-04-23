@@ -88,6 +88,8 @@ tick(4, 'test'); // true
 tick(4, 'test'); // true
 ```
 
+`tick` can be used together with `stack` or `trace` to capture the state of a particular itteration or multiple itterations.
+
 ![Tick output](./docs/static/image/tick.png)
 
 ## Installation
