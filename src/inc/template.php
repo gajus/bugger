@@ -1,63 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style>
-	<?php
-	if (false) {
-		echo file_get_contents(__DIR__ . '/static/js/syntaxhighlighter/styles/shCore.css');
-		echo file_get_contents(__DIR__ . '/static/js/syntaxhighlighter/styles/shCoreDefault.css');
-	} else {
-		echo file_get_contents(__DIR__ . '/static/css/shCoreShDefault.css');
-	}
-	?>
-	<?=file_get_contents(__DIR__ . '/static/css/bugger.css')?>
-	</style>
+	<link rel="stylesheet" type="text/css" href="http://local:9980/gajus/2014%2001%2012%20bugger/src/inc/static/css/bugger.css">
+	
+	<link rel="stylesheet" type="text/css" href="http://local:9980/gajus/2014%2001%2012%20bugger/src/inc/static/css/syntaxhighlighter/shThemeDefault.css">
+	<link rel="stylesheet" type="text/css" href="http://local:9980/gajus/2014%2001%2012%20bugger/src/inc/static/css/syntaxhighlighter/shCore.css">
 
-	<script>
-	<?=file_get_contents(__DIR__ . '/static/js/jquery-2.1.0.min.js')?>
-	<?=file_get_contents(__DIR__ . '/static/js/bugger.js')?>
-
-	<?=file_get_contents(__DIR__ . '/static/js/syntaxhighlighter/scripts/shCore.js')?>
-	<?=file_get_contents(__DIR__ . '/static/js/syntaxhighlighter/scripts/shBrushPhp.js')?>
-	</script>
+	<script src="http://local:9980/gajus/2014%2001%2012%20bugger/src/inc/static/js/jquery-2.1.0.min.js"></script>
+	<script src="http://local:9980/gajus/2014%2001%2012%20bugger/src/inc/static/js/syntaxhighlighter/scripts/shCore.js"></script>
+	<script src="http://local:9980/gajus/2014%2001%2012%20bugger/src/inc/static/js/syntaxhighlighter/scripts/shBrushPhp.js"></script>
 </head>
-<?php
-$display_number_of_lines = 10;
-?>
 <body>
-	<div id="bugger">
-		<?php foreach ($stack as $trace):?>
-		<ol class="stack">
-			<?php foreach ([array_shift($trace)] as $t):?>
-			<li>
-				<?php
-				if (isset($t['file'])):
-
-				$file = file($t['file']);
-				$file = array_map('rtrim', $file);
-
-				$number_of_line_start = max($t['line'] - $display_number_of_lines / 2, 0);
-				#$number_of_line_end = $display_number_of_lines - ($t['line'] - $number_of_line_start);
-
-				$file = array_slice($file, $number_of_line_start, $display_number_of_lines);
-				$file = array_map(function ($e) { return $e ? $e : '	'; }, $file);
-				?>
-				<div class="location">
-					<span class="file">../<?=explode('/', mb_substr($t['file'], -80), 2)[1]?></span>:<span class="line"><?=$t['line']?></span>
-				</div>
-				<pre class="brush: php; first-line: <?=$number_of_line_start + 1?>; highlight: <?=$t['line']?>;"><?=htmlspecialchars(implode($file, "\n"))?></pre>
-				<?php endif;?>
-				
-				<pre class="brush: php;"><?=$t['args_dump']?></pre>
-			</li>
+	<div id="bugger" style="width: <?=count($tracestack) * 610?>px">
+		<?php foreach ($tracestack as $stack):?>
+		<div class="trace">
+			<?php foreach ($stack as $trace):?>
+			<div class="card">
+				<div class="header">
+		            <?=$trace['file']?>
+		        </div>
+		        <div class="dump">
+		            <pre class="brush: php; gutter: false;"><?=$trace['args_dump']?></pre>
+		        </div>
+		        <div class="file-source">
+		        	<pre class="brush: php; highlight: [<?=$trace['line']?>];"><?=htmlspecialchars(file_get_contents($trace['file']))?></pre>
+		        </div>
+			</div>
 			<?php endforeach;?>
-		</ol>
+		</div>
 		<?php endforeach;?>
 	</div>
 
 	<script>
-	SyntaxHighlighter.defaults.toolbar = false;
-	SyntaxHighlighter.all();
-	</script>
+    SyntaxHighlighter.defaults.toolbar = false;
+    SyntaxHighlighter.defaults['auto-links'] = false;    
+    SyntaxHighlighter.all();
+    </script>
 </body>
 </html>

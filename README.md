@@ -54,6 +54,8 @@ echo 'qux';
 
 In the above example, 'foo', 'bar', 'baz' and 'qux' will be discarded.
 
+![Stack output](./docs/static/image/stack.png)
+
 ### Tick
 
 ```php

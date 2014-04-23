@@ -1,0 +1,82 @@
+.syntaxhighlighter {
+	a,
+	div,
+	code,
+	table,
+	table td,
+	table tr,
+	table tbody,
+	table thead,
+	table caption,
+	textarea {
+		background: none;
+		border: 0;
+		bottom: auto;
+		float: none;
+		height: auto;
+		left: auto;
+		line-height: 1.1em;
+		margin: 0;
+		outline: 0;
+		overflow: visible;
+		padding: 0;
+		margin: 0;
+		position: static;
+		right: auto;
+		text-align: left;
+		top: auto;
+		vertical-align: baseline;
+		width: auto;
+		box-sizing: content-box;
+		font: 13px/20px "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+	}
+
+	width: 100%;
+	
+	position: relative;
+	overflow: auto;
+	
+	&.source { overflow: hidden; }
+	
+	// set up bold and italic
+	.bold { font-weight: bold; }
+	.italic { font-style: italic; }
+	
+	.line { white-space: pre; padding: 0 5px; }
+	
+	// main table and columns
+	table {
+		width: 100%;
+		
+		td.code {
+			width: 100%;
+			
+			.container {
+				position: relative;
+				
+				textarea {
+					box-sizing: border-box;
+					position: absolute;
+					left: 0;
+					top: 0;
+					padding: 0 5px;
+					width: 100%;
+					height: 100%;
+					border: none;
+					background: #fff;
+					overflow: hidden;
+					white-space: pre;
+				} 
+			} 
+		}
+		
+		// middle spacing between line numbers and lines
+		td.gutter .line {
+			text-align: right;
+		}
+		
+		td.code .line {
+			
+		}
+	}
+}

@@ -8,7 +8,7 @@ namespace Gajus\Bugger;
  */
 class Bugger {
     static private
-        $stack = [],
+        $tracestack = [],
         $ticks = [];
 
     /**
@@ -23,7 +23,7 @@ class Bugger {
             ob_end_clean();
         }
 
-        static::$stack[] = static::getBacktrace();
+        static::$tracestack = [static::getBacktrace()];
 
         exit;
     }
@@ -40,7 +40,7 @@ class Bugger {
             ob_end_clean();
         }
 
-        static::$stack[] = static::getBacktrace();
+        static::$tracestack[] = static::getBacktrace();
 
         ob_start();
     }
@@ -81,7 +81,7 @@ class Bugger {
             }
         }
 
-        return $backtrace;
+        return array_values($backtrace);
     }
 
     /**
@@ -143,8 +143,8 @@ class Bugger {
     /**
      * @return array
      */
-    static public function getStack () {
-        return static::$stack;
+    static public function getTracestack () {
+        return static::$tracestack;
     }
 
     static public function resetTick () {

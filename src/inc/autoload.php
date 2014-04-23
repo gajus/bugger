@@ -18,9 +18,9 @@ if (isset($GLOBALS['gajus']['bugger'])) {
 $GLOBALS['gajus']['bugger'] = [];
 
 register_shutdown_function(function () {
-	$stack = \Gajus\Bugger\Bugger::getStack();
+	$tracestack = \Gajus\Bugger\Bugger::getTracestack();
 
-	if ($stack) {
+	if ($tracestack) {
 		if (php_sapi_name() === 'cli') {
 			throw new \Gajus\Bugger\Exception\LogicException('Bugger does not work in CLI environment.');
 		} else {
