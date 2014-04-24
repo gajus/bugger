@@ -10,7 +10,7 @@ Bugger is a collection of functions for debugging PHP code. Use it to:
 * Dump information about a variable
 * Set breakpoints in loops
 
-Bugger is designed to be used when remote debugger is not available. It allows to dump information about a variable together with the debug backtrace (`trace` method), it allows to collect information about multiple variables during the script execution and dump them at the end of the script execution (`stack` method), as well as trap itterations (`tick` method).
+Bugger is designed to be used when remote debugger is not available. It allows to dump information about a variable together with the debug backtrace (`trace` method), it allows to collect information about multiple variables during the script execution and dump them at the end of the script execution (`stack` method), as well as trap iterations (`tick` method).
 
 ## API
 
