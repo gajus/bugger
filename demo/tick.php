@@ -3,6 +3,9 @@ require __DIR__ . '/../vendor/autoload.php';
 
 tick(3); // tick 1, false
 tick(3); // tick 2, false
+echo 'b';
+xdebug_break();
+echo 'a';
 tick(3); // tick 3, true
 
 do {

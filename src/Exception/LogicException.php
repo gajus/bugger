@@ -1,12 +1,10 @@
 <?php
-namespace Gajus\Bump\Exception;
+namespace Gajus\BuggerException\Exception;
 
 /**
- * 
- *
- * @link https://github.com/gajus/bump for the canonical source repository
- * @license https://github.com/gajus/bump/blob/master/LICENSE BSD 3-Clause
+ * @link https://github.com/gajus/bugger for the canonical source repository
+ * @license https://github.com/gajus/bugger/blob/master/LICENSE BSD 3-Clause
  */
-class LogicException extends BumpException {
+class LogicException extends BuggerException {
 	
 }
