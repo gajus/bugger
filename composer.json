@@ -1,6 +1,6 @@
 {
 	"name": "gajus/bugger",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "Bugger is a collection of functions for debugging PHP code.",
 	"keywords": ["bugger", "dump", "debug"],
 	"homepage": "https://github.com/gajus/bugger",
