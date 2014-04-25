@@ -1,7 +1,5 @@
 $(function () {
-    $('.code').on('click', function () {
-        var argsContainer = $(this).parents('li').find('.args');
-
-        argsContainer.toggleClass('min');
+    $('.file-source.collapsed').one('click', function () {
+        $(this).removeClass('collapsed');
     });
 });

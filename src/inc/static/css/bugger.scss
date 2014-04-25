@@ -29,6 +29,8 @@ body {
 
     .file-source {
         border: 1px solid #ccc;
+
+        &.collapsed { cursor: pointer; }
     }
 
     .dump {
