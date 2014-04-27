@@ -6,5 +6,5 @@ namespace Gajus\Bugger\Exception;
  * @license https://github.com/gajus/bugger/blob/master/LICENSE BSD 3-Clause
  */
 class ErrorException extends BuggerException {
-	
+
 }
