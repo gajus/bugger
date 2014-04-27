@@ -27,9 +27,7 @@
                 <div class="dump">
                     <?php foreach ($trace['args_dump'] as $i => $argdump) { ?>
                         <div class="argument-label">Argument <?= ($i + 1) ?>:</div>
-                        <pre class="brush: php; gutter: false;">
-                        <?=$argdump?>
-                        </pre>
+                        <pre class="brush: php; gutter: false;"><?=$argdump?></pre>
                     <?php } // endforeach ?>
                 </div>
                 <?php } // endif ?>
