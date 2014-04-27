@@ -1,37 +1,32 @@
 <?php
 class SanitiseTest extends PHPUnit_Framework_TestCase {
-    public function testSetAccess () {
+
+    protected $sanitise;
+
+    public function setUp() {
         $class = new ReflectionClass('Gajus\Bugger\Bugger');
-        $method = $class->getMethod('sanitise');
-        $method->setAccessible(true);
-        return $method;
+
+        $this->sanitise = $class->getMethod('sanitise');
+        $this->sanitise->setAccessible(true);
     }
 
-    /**
-     * @depends testSetAccess
-     */
-    public function testAscii ($method) {
-        $this->assertSame('az09', $method->invoke('Gajus\Bugger\Bugger', 'az09'));
+    public function sanitise($argument) {
+        return $this->sanitise->invoke('Gajus\Bugger\Bugger', $argument);
     }
 
-    /**
-     * @depends testSetAccess
-     */
-    public function testUnicodeCharacters ($method) {
-        $this->assertSame('çüöйȝîûηыეமிᚉ⠛', $method->invoke('Gajus\Bugger\Bugger', 'çüöйȝîûηыეமிᚉ⠛'));
+    public function testAscii () {
+        $this->assertSame('az09', $this->sanitise('az09'));
     }
 
-    /**
-     * @depends testSetAccess
-     */
-    public function testControlCharacter ($method) {
-        $this->assertSame('\03', $method->invoke('Gajus\Bugger\Bugger', "\003")); /* http://en.wikipedia.org/wiki/C0_and_C1_control_codes#C0_.28ASCII_and_derivatives.29*/
+    public function testUnicodeCharacters () {
+        $this->assertSame('çüöйȝîûηыეமிᚉ⠛', $this->sanitise('çüöйȝîûηыეமிᚉ⠛'));
     }
 
-    /**
-     * @depends testSetAccess
-     */
-    public function testUnicodeSymbol ($method) {
-        $this->assertSame('⛷⛸⛂☃⛇❄❅❆★☆⚑⚐', $method->invoke('Gajus\Bugger\Bugger', '⛷⛸⛂☃⛇❄❅❆★☆⚑⚐'));
+    public function testControlCharacter () {
+        $this->assertSame('\03', $this->sanitise("\003")); /* http://en.wikipedia.org/wiki/C0_and_C1_control_codes#C0_.28ASCII_and_derivatives.29*/
+    }
+
+    public function testUnicodeSymbol () {
+        $this->assertSame('⛷⛸⛂☃⛇❄❅❆★☆⚑⚐', $this->sanitise('⛷⛸⛂☃⛇❄❅❆★☆⚑⚐'));
     }
 }
