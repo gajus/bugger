@@ -6,5 +6,5 @@ namespace Gajus\BuggerException\Exception;
  * @license https://github.com/gajus/bugger/blob/master/LICENSE BSD 3-Clause
  */
 class LogicException extends BuggerException {
-	
+
 }

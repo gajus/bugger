@@ -1,27 +1,27 @@
 {
-	"name": "gajus/bugger",
-	"version": "0.2.1",
-	"description": "Bugger is a collection of functions for debugging PHP code.",
-	"keywords": ["bugger", "dump", "debug"],
-	"homepage": "https://github.com/gajus/bugger",
-	"type": "library",
-	"license": "BSD-3-Clause",
-	"authors": [
-		{
-			"name": "Gajus Kuizinas",
-			"email": "gk@anuary.com"
-		}
-	],
-	"require": {
-		"php": ">=5.4"
-	},
-	"require-dev": {
-	    "satooshi/php-coveralls": "dev-master"
-	},
-	"autoload": {
-		"psr-4": {
-			"Gajus\\Bugger\\": "src/"
-		},
-		"files": ["src/inc/autoload.php"]
-	}
+    "name": "gajus/bugger",
+    "version": "0.2.1",
+    "description": "Bugger is a collection of functions for debugging PHP code.",
+    "keywords": ["bugger", "dump", "debug"],
+    "homepage": "https://github.com/gajus/bugger",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Gajus Kuizinas",
+            "email": "gk@anuary.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gajus\\Bugger\\": "src/"
+        },
+        "files": ["src/inc/autoload.php"]
+    }
 }
