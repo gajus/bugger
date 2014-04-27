@@ -69,19 +69,55 @@ class Bugger {
         $backtrace = debug_backtrace();
 
         foreach ($backtrace as $i => $b) {
-            if (isset($backtrace[$i]['function'], $backtrace[$i + 1]['function']) && in_array($backtrace[$i]['function'], ['stack', 'trace', 'tick']) && $backtrace[$i + 1]['function'] === 'forward_static_call_array') {
+            if (isset($backtrace[$i]['function'], $backtrace[$i + 1]['function'])
+                && in_array($backtrace[$i]['function'], ['stack', 'trace', 'tick'])
+                && $backtrace[$i + 1]['function'] === 'forward_static_call_array'
+            ) {
+                // Remove the noise of the internal tool's functions
                 unset($backtrace[$i - 1], $backtrace[$i], $backtrace[$i + 1]);
-            } else if (isset($backtrace[$i])) {
-                ob_start();
-                var_dump($backtrace[$i]['args']);
-                $backtrace[$i]['args_dump'] = htmlspecialchars(ob_get_clean());
-
-                $backtrace[$i]['args_dump'] = static::sanitise($backtrace[$i]['args_dump']);
-                $backtrace[$i]['args_dump'] = static::translateTimestamp($backtrace[$i]['args_dump']);
+                continue;
             }
+
+            if (!isset($backtrace[$i]) || !$backtrace[$i]['args']) {
+                continue;
+            }
+
+            $dumpOutput = static::getArgumentsDump($backtrace[$i]['args']);
+            $backtrace[$i]['args_dump'] = $dumpOutput;
         }
 
         return array_values($backtrace);
+    }
+
+    /**
+     * Get a var_dump of the arguments
+     *
+     * @param array $args Array of values
+     * @return array
+     */
+    static private function getArgumentsDump(array $args)
+    {
+        $output = array();
+
+        foreach ($args as $arg) {
+
+            ob_start();
+            var_dump($arg);
+
+            // If xdebug is enabled and the var_dump method is overloaded, we need 
+            // to treat the output differently.
+            if (ini_get('xdebug.overload_var_dump')) {
+                $dump = strip_tags(ob_get_clean()) . "\n";
+            } else {
+                $dump = htmlspecialchars(ob_get_clean()) . "\n";
+            }
+
+            $dump = static::sanitise($dump);
+            $dump = static::translateTimestamp($dump);
+            $output[] = $dump;
+        }
+
+        return $output;
     }
 
     /**
@@ -121,7 +157,7 @@ class Bugger {
     static private function translateTimestamp ($output) {
         $regex_encoding = mb_regex_encoding();
 
-        $output = \mb_ereg_replace_callback('int\(([0-9]{10})\)', function ($e) {
+        $output = \mb_ereg_replace_callback('int[\(| ]([0-9]{10})\)?', function ($e) {
             if ($e[1] < mktime(0,0,0,1,1,2000) || $e[1] > mktime(0,0,0,1,1,2020)) {
                 return $e[0];
             }
