@@ -23,10 +23,10 @@
                 <div class="header">
                     <?=$trace['file']?>
                 </div>
-                <?php if ($trace['args_dump']) { ?>
+                <?php if (isset($trace['args_dump']) && $trace['args_dump']) { ?>
                 <div class="dump">
                     <?php foreach ($trace['args_dump'] as $i => $argdump) { ?>
-                        <p class="argument-label">Argument <?= ($i + 1) ?>:</p>
+                        <div class="argument-label">Argument <?= ($i + 1) ?>:</div>
                         <pre class="brush: php; gutter: false;">
                         <?=$argdump?>
                         </pre>
