@@ -23,9 +23,14 @@
                 <div class="header">
                     <?=$trace['file']?>
                 </div>
+                <?php if (isset($trace['args_dump']) && $trace['args_dump']) { ?>
                 <div class="dump">
-                    <pre class="brush: php; gutter: false;"><?=$trace['args_dump']?></pre>
+                    <?php foreach ($trace['args_dump'] as $i => $argdump) { ?>
+                        <div class="argument-label">Argument <?= ($i + 1) ?>:</div>
+                        <pre class="brush: php; gutter: false;"><?=$argdump?></pre>
+                    <?php } // endforeach ?>
                 </div>
+                <?php } // endif ?>
                 <div class="file-source collapsed">
                     <pre class="brush: php; highlight: [<?=$trace['line']?>];"><?=htmlspecialchars(file_get_contents($trace['file']))?></pre>
                 </div>
